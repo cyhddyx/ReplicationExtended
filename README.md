@@ -1,47 +1,50 @@
 # Replication Extended
 
-An unofficial addon for [Replication](https://www.curseforge.com/minecraft/mc-mods/replication), maintained by cyhddyx.
+由 cyhddyx 制作的 [Replication](https://www.curseforge.com/minecraft/mc-mods/replication) 非官方扩展模组。
 
-Adds eight dedicated matter tanks. Each tank is permanently bound to one matter type, including when empty, so automated matter networks cannot fill an emptied tank with a different type.
+添加八种专用物质储罐，每个储罐固定存储一种物质。即使物质被完全消耗，储罐也不会接受其他类型的物质，方便搭建稳定的自动化物质存储网络。
 
-## Features
+## 功能
 
-- Dedicated tanks for Earth, Nether, Organic, Ender, Metallic, Precious, Living, and Quantum matter.
-- Distinct matter-colored tank textures and dynamic stored-matter rendering.
-- Connections to Replication's matter network through the top and bottom.
-- Configurable network priority through the tank interface.
-- Stored matter is carried by the dropped tank and restored when placed.
-- Optional Jade integration and stored-matter item tooltips.
-- English and Simplified Chinese translations.
+- 八种专用储罐：大地、下界、有机、末影、金属、珍宝、生命、量子。
+- 物质类型固定，空罐也保持锁定。
+- 不同物质采用对应颜色的贴图，透过观察窗可查看实时储量变化。
+- 支持从顶部和底部连接 Replication 物质网络。
+- 可在储罐界面中设置网络优先级。
+- 打掉储罐后保留其中的物质，重新放置即可继续使用。
+- 支持物品储量提示和 Jade 信息显示。
+- 支持简体中文和英文。
 
-## Requirements
+## 运行环境与前置
 
 - Minecraft 1.21.1 / NeoForge 21.1.250+
 - [Replication](https://www.curseforge.com/minecraft/mc-mods/replication)
 - [Titanium](https://www.curseforge.com/minecraft/mc-mods/titanium)
-- Optional: [Jade](https://www.curseforge.com/minecraft/mc-mods/jade)
+- 可选：[Jade](https://www.curseforge.com/minecraft/mc-mods/jade)
 
-Install on both client and server.
+客户端和服务端均需安装。
 
-## Crafting
+## 合成
 
-Surround a Replication matter tank with four matching catalysts in a cross. **Empty the source tank before crafting: these standard recipes do not transfer its stored matter.**
+将原版 Replication 物质储罐放在工作台中央，在上下左右放置四个对应材料，即可合成专用储罐。
 
-| Matter | Catalyst |
+**合成前请清空原储罐，当前配方不会转移其中存储的物质。**
+
+| 物质类型 | 合成材料 |
 | --- | --- |
-| Earth | Dirt |
-| Nether | Netherrack |
-| Organic | Bone meal |
-| Ender | Ender pearl |
-| Metallic | Iron ingot |
-| Precious | Gold ingot |
-| Living | Slime ball |
-| Quantum | Amethyst shard |
+| 大地 | 泥土 |
+| 下界 | 下界岩 |
+| 有机 | 骨粉 |
+| 末影 | 末影珍珠 |
+| 金属 | 铁锭 |
+| 珍宝 | 金锭 |
+| 生命 | 黏液球 |
+| 量子 | 紫水晶碎片 |
 
-## Feedback
+## 反馈
 
-[Report bugs or suggest features](https://github.com/cyhddyx/ReplicationExtended/issues).
+[提交问题或功能建议](https://github.com/cyhddyx/ReplicationExtended/issues)。
 
-## Credits
+## 致谢
 
-Thanks to Buuz135 and Replication's contributors for the original mod, tank assets, and code used by this addon. See [third-party notices](THIRD_PARTY_NOTICES.txt).
+感谢 Buuz135 及 Replication 的贡献者。本扩展使用了原模组的部分储罐模型、贴图与代码，相关许可见[第三方许可声明](THIRD_PARTY_NOTICES.txt)。
