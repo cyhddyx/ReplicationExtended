@@ -15,8 +15,6 @@ The tanks connect to Replication's matter network from above and below. They inc
 - Install the addon on both client and server.
 - Jade is optional.
 
-This beta is built against Replication 1.21.1-1.2.7 and Titanium 1.21-4.0.42. Back up your world before testing.
-
 ## Crafting
 
 Place an empty Replication matter tank in the center of the crafting grid with four matching catalysts above, below, left, and right:
@@ -34,6 +32,6 @@ Empty the original tank before crafting; the current recipes do not transfer sto
 
 ## Feedback and Credits
 
-[Source and documentation](https://github.com/cyhddyx/ReplicationExtended) | [Report an issue](https://github.com/cyhddyx/ReplicationExtended/issues)
+[Source](https://github.com/cyhddyx/ReplicationExtended) | [Report an issue](https://github.com/cyhddyx/ReplicationExtended/issues)
 
-Created by cyhddyx. This is an unofficial addon, not the original Replication mod. Thanks to Buuz135 and Replication's contributors; derived tank assets and code retain their original MIT license notices. Original addon contributions use the project's All Rights Reserved policy.
+Created by cyhddyx. Thanks to Buuz135 and Replication's contributors for the original mod, tank assets, and code used by this addon.

@@ -14,14 +14,14 @@ Adds eight dedicated matter tanks. Each tank is permanently bound to one matter 
 - Optional Jade integration and stored-matter item tooltips.
 - English and Simplified Chinese translations.
 
-## Installation
+## Requirements
 
-Use Minecraft **1.21.1**, **NeoForge 21.1.250 or later in the 21.1 series**, and Java 21.
-Install this addon on both the client and server, together with Replication and Titanium and any dependencies required by those mods. Jade is optional.
+- Minecraft 1.21.1 / NeoForge 21.1.250+
+- [Replication](https://www.curseforge.com/minecraft/mc-mods/replication)
+- [Titanium](https://www.curseforge.com/minecraft/mc-mods/titanium)
+- Optional: [Jade](https://www.curseforge.com/minecraft/mc-mods/jade)
 
-The current build uses Replication **1.21.1-1.2.7** and Titanium **1.21-4.0.42**. The loader metadata permits older versions, but those combinations have not been verified here. This is a beta release; back up worlds before testing.
-
-Download the addon JAR from [Releases](https://github.com/cyhddyx/ReplicationExtended/releases) when available. The original Replication mod is a separate dependency and is not bundled.
+Install on both client and server.
 
 ## Crafting
 
@@ -38,20 +38,10 @@ Surround a Replication matter tank with four matching catalysts in a cross. **Em
 | Living | Slime ball |
 | Quantum | Amethyst shard |
 
-## Build
+## Feedback
 
-Install JDK 21 and place the Replication source checkout next to this addon as `../Replication`. Build Replication first so its compiled `Replication-*.jar` is available in `../Replication/build/libs/`. Then run `./gradlew build` (Windows: `.\gradlew.bat build`) in this addon. The addon reads that local Replication JAR; it does not download Replication through Gradle. The addon JAR is generated in `build/libs/`.
+[Report bugs or suggest features](https://github.com/cyhddyx/ReplicationExtended/issues).
 
-The GitHub build workflow also needs that local dependency prepared; checking out this addon alone is not sufficient.
+## Credits
 
-## Status and Feedback
-
-Version **0.1.0-beta**. A successful build does not replace in-game testing. See [release checks and planned improvements](docs/RELEASE_CHECKLIST.md) for outstanding validation and known limitations.
-
-Report problems in [Issues](https://github.com/cyhddyx/ReplicationExtended/issues), including mod versions, reproduction steps, and relevant logs with private information removed.
-
-## Credits and Licensing
-
-Replication is created by Buuz135 and contributors. Tank geometry, textures, and portions of the integration/rendering code are derived from Replication and retain its MIT notice in [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
-
-Original addon contributions retain the project's existing **All Rights Reserved** policy; publishing the source does not relicense it as MIT. The NeoForged MDK template is covered separately by [TEMPLATE_LICENSE.txt](TEMPLATE_LICENSE.txt).
+Thanks to Buuz135 and Replication's contributors for the original mod, tank assets, and code used by this addon. See [third-party notices](THIRD_PARTY_NOTICES.txt).
