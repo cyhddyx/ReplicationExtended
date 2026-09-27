@@ -7,5 +7,13 @@
   "block.replicationextended.locked_matter_tank_metallic": "金属物质储罐",
   "block.replicationextended.locked_matter_tank_precious": "珍宝物质储罐",
   "block.replicationextended.locked_matter_tank_living": "生命物质储罐",
-  "block.replicationextended.locked_matter_tank_quantum": "量子物质储罐"
+  "block.replicationextended.locked_matter_tank_quantum": "量子物质储罐",
+  "block.replicationextended.locked_matter_tank_earth_4x": "4X 大地物质储罐",
+  "block.replicationextended.locked_matter_tank_nether_4x": "4X 下界物质储罐",
+  "block.replicationextended.locked_matter_tank_organic_4x": "4X 有机物质储罐",
+  "block.replicationextended.locked_matter_tank_ender_4x": "4X 末影物质储罐",
+  "block.replicationextended.locked_matter_tank_metallic_4x": "4X 金属物质储罐",
+  "block.replicationextended.locked_matter_tank_precious_4x": "4X 珍宝物质储罐",
+  "block.replicationextended.locked_matter_tank_living_4x": "4X 生命物质储罐",
+  "block.replicationextended.locked_matter_tank_quantum_4x": "4X 量子物质储罐"
 }

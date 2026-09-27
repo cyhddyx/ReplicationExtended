@@ -27,12 +27,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Replication Extended -- addons for the Replication tech mod.
  * <p>
- * Currently adds one dedicated matter tank per matter type. Each tank is bound to its type at the
- * block level, so it can only ever hold that type.
+ * Currently adds one dedicated matter tank per matter type, in two capacity tiers: the base tank and
+ * a 4X tank. Each tank is bound to its type at the block level, so it can only ever hold that type.
  */
 @Mod(ReplicationExtended.MODID)
 public class ReplicationExtended {
@@ -42,6 +43,15 @@ public class ReplicationExtended {
 
     /** Prefix shared by every dedicated tank's registry name. */
     public static final String TANK_PREFIX = "locked_matter_tank_";
+
+    /** Registry-name suffix of the 4X tier. The base tier carries no suffix. */
+    public static final String TANK_4X_SUFFIX = "_4x";
+
+    /** Capacity multiplier of the base tier, i.e. exactly the configured matter tank capacity. */
+    public static final int BASE_CAPACITY_MULTIPLIER = LockedMatterTankBlock.BASE_CAPACITY_MULTIPLIER;
+
+    /** Capacity multiplier of the 4X tier. */
+    public static final int CAPACITY_MULTIPLIER_4X = 4;
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
@@ -60,21 +70,36 @@ public class ReplicationExtended {
             MatterType.QUANTUM
     );
 
+    /** Base-tier tanks, keyed by matter type. */
     public static final Map<IMatterType, DeferredBlock<LockedMatterTankBlock>> TANKS = new LinkedHashMap<>();
+    /** 4X-tier tanks, keyed by matter type. */
+    public static final Map<IMatterType, DeferredBlock<LockedMatterTankBlock>> TANKS_4X = new LinkedHashMap<>();
     public static final Map<IMatterType, DeferredItem<BlockItem>> TANK_ITEMS = new LinkedHashMap<>();
+    public static final Map<IMatterType, DeferredItem<BlockItem>> TANK_ITEMS_4X = new LinkedHashMap<>();
 
     static {
         for (IMatterType type : TANK_TYPES) {
-            String name = TANK_PREFIX + type.getName();
-            DeferredBlock<LockedMatterTankBlock> block = BLOCKS.register(name, () -> new LockedMatterTankBlock(type));
-            TANKS.put(type, block);
-            TANK_ITEMS.put(type, ITEMS.registerSimpleBlockItem(name, block));
+            registerTank(type, BASE_CAPACITY_MULTIPLIER, "", TANKS, TANK_ITEMS);
+            registerTank(type, CAPACITY_MULTIPLIER_4X, TANK_4X_SUFFIX, TANKS_4X, TANK_ITEMS_4X);
         }
     }
 
     /**
-     * One block entity type shared by all the dedicated tanks; the concrete type comes from the
-     * block, which is why a single type can serve every variant.
+     * Registers one tier of one matter type. The tier lives in the block, not in a second block
+     * entity type, so both tiers stay interchangeable for everything that looks at a tank.
+     */
+    private static void registerTank(IMatterType type, int capacityMultiplier, String nameSuffix,
+                                     Map<IMatterType, DeferredBlock<LockedMatterTankBlock>> tanks,
+                                     Map<IMatterType, DeferredItem<BlockItem>> items) {
+        String name = TANK_PREFIX + type.getName() + nameSuffix;
+        DeferredBlock<LockedMatterTankBlock> block = BLOCKS.register(name, () -> new LockedMatterTankBlock(type, capacityMultiplier));
+        tanks.put(type, block);
+        items.put(type, ITEMS.registerSimpleBlockItem(name, block));
+    }
+
+    /**
+     * One block entity type shared by all the dedicated tanks of both tiers; the concrete type and
+     * capacity come from the block, which is why a single type can serve every variant.
      * <p>
      * The holder resolves lazily inside both suppliers, which breaks the block {@code <->} block
      * entity type cycle: it is only read once a block entity is actually constructed. The reference
@@ -87,13 +112,23 @@ public class ReplicationExtended {
                             (LockedMatterTankBlock) state.getBlock(),
                             ReplicationExtended.LOCKED_MATTER_TANK_BE.get(),
                             pos, state),
-                    TANKS.values().stream().map(DeferredBlock::get).toArray(Block[]::new)
+                    allTankBlocks()
             ).build(null));
+
+    /** Every registered tank block, base tier first, in the order the creative tab shows them. */
+    private static Block[] allTankBlocks() {
+        return Stream.concat(TANKS.values().stream(), TANKS_4X.values().stream())
+                .map(DeferredBlock::get)
+                .toArray(Block[]::new);
+    }
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + MODID))
             .icon(() -> new ItemStack(TANK_ITEMS.get(MatterType.QUANTUM).get()))
-            .displayItems((parameters, output) -> TANK_ITEMS.values().forEach(item -> output.accept(item.get())))
+            .displayItems((parameters, output) -> {
+                TANK_ITEMS.values().forEach(item -> output.accept(item.get()));
+                TANK_ITEMS_4X.values().forEach(item -> output.accept(item.get()));
+            })
             .build());
 
     public ReplicationExtended(IEventBus modEventBus, ModContainer modContainer) {
@@ -109,10 +144,14 @@ public class ReplicationExtended {
                 block -> BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(MODID));
     }
 
-    /** Registry names of every dedicated tank, handy for resource generation and tests. */
+    /**
+     * Registry names of every dedicated tank, base tier first, matching the creative tab. Handy for
+     * resource generation and tests.
+     */
     public static List<String> tankNames() {
         List<String> names = new ArrayList<>();
         TANK_TYPES.forEach(type -> names.add(TANK_PREFIX + type.getName()));
+        TANK_TYPES.forEach(type -> names.add(TANK_PREFIX + type.getName() + TANK_4X_SUFFIX));
         return names;
     }
 }

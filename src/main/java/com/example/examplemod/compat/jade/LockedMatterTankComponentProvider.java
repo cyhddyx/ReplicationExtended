@@ -4,6 +4,7 @@ import com.buuz135.replication.ReplicationConfig;
 import com.buuz135.replication.api.matter_fluid.MatterStack;
 import com.buuz135.replication.util.NumberUtils;
 import com.example.examplemod.ReplicationExtended;
+import com.example.examplemod.block.LockedMatterTankBlock;
 import com.example.examplemod.block.tile.LockedMatterTankBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,10 +34,21 @@ public class LockedMatterTankComponentProvider implements IBlockComponentProvide
             var matterStack = MatterStack.loadMatterStackFromNBT(blockAccessor.getServerData().getCompound("MatterStack"));
             var floatColor = matterStack.getMatterType().getColor().get();
             var color = new Color(floatColor[0], floatColor[1], floatColor[2], floatColor[3]);
-            iTooltip.add(new ProgressElement((float) (matterStack.getAmount() / ReplicationConfig.MatterTank.CAPACITY),
+            iTooltip.add(new ProgressElement((float) (matterStack.getAmount() / capacityOf(blockAccessor)),
                     matterStack.isEmpty() ? Component.translatable("tooltip.titanium.tank.empty") : Component.translatable(matterStack.getTranslationKey()).append(" ").append(NumberUtils.getFormatedBigNumber(matterStack.getAmount()))
                     , IElementHelper.get().progressStyle().color(color.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), false));
         }
+    }
+
+    /**
+     * The bar has to be scaled by the capacity of the tank being looked at, not by the base
+     * configured capacity: a 4X tank at half load would otherwise read as overflowing.
+     */
+    private static double capacityOf(BlockAccessor blockAccessor) {
+        if (blockAccessor.getBlockState().getBlock() instanceof LockedMatterTankBlock tankBlock) {
+            return tankBlock.getCapacity();
+        }
+        return ReplicationConfig.MatterTank.CAPACITY;
     }
 
     @Override

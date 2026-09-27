@@ -48,9 +48,9 @@ displayName="${mod_name}" #mandatory
 description='''
 Addons for the Replication tech mod.
 
-Adds one dedicated matter tank per matter type. Each tank is bound to its type at the block level,
-so it can only ever hold that one type -- including while empty, when an ordinary tank would accept
-anything.
+Adds one dedicated matter tank per matter type, in a base and a 4X capacity tier. Each tank is
+bound to its type at the block level, so it can only ever hold that one type -- including while
+empty, when an ordinary tank would accept anything.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

@@ -1,6 +1,7 @@
 package com.example.examplemod.block;
 
 import com.buuz135.replication.ReplicationAttachments;
+import com.buuz135.replication.ReplicationConfig;
 import com.buuz135.replication.api.IMatterType;
 import com.buuz135.replication.block.shapes.MatterTankShapes;
 import com.example.examplemod.ReplicationExtended;
@@ -32,20 +33,46 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
- * A matter tank bound to one matter type. The type is baked into the block, so it is decided when
- * the tank is crafted and cannot be changed or cleared afterwards.
+ * A matter tank bound to one matter type. Both the type and the capacity tier are baked into the
+ * block, so they are decided when the tank is crafted and cannot be changed or cleared afterwards.
  */
 public class LockedMatterTankBlock extends BasicTileBlock<LockedMatterTankBlockEntity> implements INetworkDirectionalConnection {
 
+    /** Capacity multiplier of the base tier, i.e. exactly {@code ReplicationConfig.MatterTank.CAPACITY}. */
+    public static final int BASE_CAPACITY_MULTIPLIER = 1;
+
     private final IMatterType matterType;
+    private final int capacityMultiplier;
 
     public LockedMatterTankBlock(IMatterType matterType) {
+        this(matterType, BASE_CAPACITY_MULTIPLIER);
+    }
+
+    /**
+     * @param capacityMultiplier how many times the configured matter tank capacity this tank holds.
+     *                           It is read back through {@link #getCapacity()} rather than cached, so
+     *                           a config change moves every tank with it.
+     */
+    public LockedMatterTankBlock(IMatterType matterType, int capacityMultiplier) {
         super(Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion(), LockedMatterTankBlockEntity.class);
         this.matterType = matterType;
+        this.capacityMultiplier = capacityMultiplier;
     }
 
     public IMatterType getMatterType() {
         return this.matterType;
+    }
+
+    public int getCapacityMultiplier() {
+        return this.capacityMultiplier;
+    }
+
+    /**
+     * Capacity of this tank in matter units. Deliberately computed on every call instead of being
+     * snapshotted into the block at construction time, which is long before the config is loaded.
+     */
+    public int getCapacity() {
+        return ReplicationConfig.MatterTank.CAPACITY * this.capacityMultiplier;
     }
 
     @Override

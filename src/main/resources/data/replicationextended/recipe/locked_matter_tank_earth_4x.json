@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " I ",
+    "ITI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "replication:replica_ingot"
+    },
+    "T": {
+      "item": "replicationextended:locked_matter_tank_earth"
+    }
+  },
+  "result": {
+    "id": "replicationextended:locked_matter_tank_earth_4x",
+    "count": 1
+  }
+}

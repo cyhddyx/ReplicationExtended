@@ -1,6 +1,5 @@
 package com.example.examplemod.block.tile;
 
-import com.buuz135.replication.ReplicationConfig;
 import com.buuz135.replication.api.IMatterType;
 import com.buuz135.replication.api.matter_fluid.IMatterTank;
 import com.buuz135.replication.api.matter_fluid.MatterStack;
@@ -37,6 +36,9 @@ import java.util.List;
  * no interaction that could change or clear it. Both the tank's own validator and the component's
  * insert predicate are pinned to that type, which is what makes the restriction hold even when the
  * tank is sitting at zero matter -- the case where a contents-derived lock silently stops working.
+ * <p>
+ * Capacity is a block property too: the base tanks and the 4X tanks share this one block entity
+ * type and differ only by the multiplier their block reports.
  */
 public class LockedMatterTankBlockEntity extends NetworkBlockEntity<LockedMatterTankBlockEntity>
         implements IMatterTanksSupplier, IMatterTanksConsumer {
@@ -58,8 +60,11 @@ public class LockedMatterTankBlockEntity extends NetworkBlockEntity<LockedMatter
 
     public LockedMatterTankBlockEntity(BasicTileBlock<LockedMatterTankBlockEntity> base, BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(base, blockEntityType, pos, state);
-        this.matterType = ((LockedMatterTankBlock) state.getBlock()).getMatterType();
-        this.tank = new MatterTankComponent<LockedMatterTankBlockEntity>("tank", ReplicationConfig.MatterTank.CAPACITY, 32, 28)
+        // The block carries both the fixed matter type and the capacity tier, so a 4X tank simply
+        // builds a tank of four times the configured capacity with no extra block entity type.
+        LockedMatterTankBlock tankBlock = (LockedMatterTankBlock) state.getBlock();
+        this.matterType = tankBlock.getMatterType();
+        this.tank = new MatterTankComponent<LockedMatterTankBlockEntity>("tank", tankBlock.getCapacity(), 32, 28)
                 .setTankAction(FluidTankComponent.Action.BOTH);
         // Two independent gates, both pinned to the fixed type:
         //  - the validator guards MatterTank.fill, which is the path fillForced() and the

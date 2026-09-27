@@ -7,6 +7,14 @@
     "replicationextended:locked_matter_tank_metallic",
     "replicationextended:locked_matter_tank_precious",
     "replicationextended:locked_matter_tank_living",
-    "replicationextended:locked_matter_tank_quantum"
+    "replicationextended:locked_matter_tank_quantum",
+    "replicationextended:locked_matter_tank_earth_4x",
+    "replicationextended:locked_matter_tank_nether_4x",
+    "replicationextended:locked_matter_tank_organic_4x",
+    "replicationextended:locked_matter_tank_ender_4x",
+    "replicationextended:locked_matter_tank_metallic_4x",
+    "replicationextended:locked_matter_tank_precious_4x",
+    "replicationextended:locked_matter_tank_living_4x",
+    "replicationextended:locked_matter_tank_quantum_4x"
   ]
 }

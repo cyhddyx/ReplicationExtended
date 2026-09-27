@@ -7,5 +7,13 @@
   "block.replicationextended.locked_matter_tank_metallic": "Metallic Matter Tank",
   "block.replicationextended.locked_matter_tank_precious": "Precious Matter Tank",
   "block.replicationextended.locked_matter_tank_living": "Living Matter Tank",
-  "block.replicationextended.locked_matter_tank_quantum": "Quantum Matter Tank"
+  "block.replicationextended.locked_matter_tank_quantum": "Quantum Matter Tank",
+  "block.replicationextended.locked_matter_tank_earth_4x": "4X Earth Matter Tank",
+  "block.replicationextended.locked_matter_tank_nether_4x": "4X Nether Matter Tank",
+  "block.replicationextended.locked_matter_tank_organic_4x": "4X Organic Matter Tank",
+  "block.replicationextended.locked_matter_tank_ender_4x": "4X Ender Matter Tank",
+  "block.replicationextended.locked_matter_tank_metallic_4x": "4X Metallic Matter Tank",
+  "block.replicationextended.locked_matter_tank_precious_4x": "4X Precious Matter Tank",
+  "block.replicationextended.locked_matter_tank_living_4x": "4X Living Matter Tank",
+  "block.replicationextended.locked_matter_tank_quantum_4x": "4X Quantum Matter Tank"
 }

@@ -1,7 +1,6 @@
 package com.example.examplemod.client;
 
 import com.buuz135.replication.ReplicationAttachments;
-import com.buuz135.replication.ReplicationConfig;
 import com.buuz135.replication.api.matter_fluid.MatterStack;
 import com.example.examplemod.ReplicationExtended;
 import com.example.examplemod.block.LockedMatterTankBlock;
@@ -26,11 +25,13 @@ public class LockedTankTooltipHandler {
     public static void onItemTooltip(ItemTooltipEvent event) {
         var stack = event.getItemStack();
         if (stack.isEmpty() || !stack.has(ReplicationAttachments.TILE)) return;
-        if (!(stack.getItem() instanceof BlockItem blockItem) || !(blockItem.getBlock() instanceof LockedMatterTankBlock)) return;
+        if (!(stack.getItem() instanceof BlockItem blockItem) || !(blockItem.getBlock() instanceof LockedMatterTankBlock tankBlock)) return;
         var tag = stack.get(ReplicationAttachments.TILE);
         if (tag == null || !tag.contains("tank")) return;
         var matterStack = MatterStack.loadMatterStackFromNBT(tag.getCompound("tank"));
-        event.getToolTip().add(1, Component.translatable("tooltip.titanium.tank.amount").withStyle(ChatFormatting.GOLD).append(Component.literal(ChatFormatting.WHITE + new DecimalFormat().format(matterStack.getAmount()) + ChatFormatting.GOLD + "/" + ChatFormatting.WHITE + new DecimalFormat().format(ReplicationConfig.MatterTank.CAPACITY))).append(Component.translatable("tooltip.replication.tank.unit").withStyle(ChatFormatting.DARK_AQUA)));
+        // The block, not the config, knows the tier: a 4X tank holds four times as much.
+        var capacity = tankBlock.getCapacity();
+        event.getToolTip().add(1, Component.translatable("tooltip.titanium.tank.amount").withStyle(ChatFormatting.GOLD).append(Component.literal(ChatFormatting.WHITE + new DecimalFormat().format(matterStack.getAmount()) + ChatFormatting.GOLD + "/" + ChatFormatting.WHITE + new DecimalFormat().format(capacity))).append(Component.translatable("tooltip.replication.tank.unit").withStyle(ChatFormatting.DARK_AQUA)));
         event.getToolTip().add(1, Component.literal(ChatFormatting.GOLD + Component.translatable("tooltip.replication.tank.matter").getString()).append(matterStack.isEmpty() ? Component.translatable("tooltip.titanium.tank.empty").withStyle(ChatFormatting.WHITE) : Component.translatable(matterStack.getTranslationKey())).withStyle(ChatFormatting.WHITE));
     }
 }
