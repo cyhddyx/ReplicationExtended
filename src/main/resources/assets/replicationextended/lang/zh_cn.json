@@ -1,0 +1,11 @@
+{
+  "itemGroup.replicationextended": "复制：扩展",
+  "block.replicationextended.locked_matter_tank_earth": "大地物质储罐",
+  "block.replicationextended.locked_matter_tank_nether": "下界物质储罐",
+  "block.replicationextended.locked_matter_tank_organic": "有机物质储罐",
+  "block.replicationextended.locked_matter_tank_ender": "末影物质储罐",
+  "block.replicationextended.locked_matter_tank_metallic": "金属物质储罐",
+  "block.replicationextended.locked_matter_tank_precious": "珍宝物质储罐",
+  "block.replicationextended.locked_matter_tank_living": "生命物质储罐",
+  "block.replicationextended.locked_matter_tank_quantum": "量子物质储罐"
+}

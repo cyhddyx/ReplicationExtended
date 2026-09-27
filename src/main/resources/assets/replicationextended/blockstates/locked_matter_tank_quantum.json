@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "replicationextended:block/locked_matter_tank_quantum"
+    }
+  }
+}

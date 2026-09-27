@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "CTC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:netherrack"
+    },
+    "T": {
+      "item": "replication:matter_tank"
+    }
+  },
+  "result": {
+    "id": "replicationextended:locked_matter_tank_nether",
+    "count": 1
+  }
+}

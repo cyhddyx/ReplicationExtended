@@ -1,0 +1,11 @@
+{
+  "itemGroup.replicationextended": "Replication Extended",
+  "block.replicationextended.locked_matter_tank_earth": "Earth Matter Tank",
+  "block.replicationextended.locked_matter_tank_nether": "Nether Matter Tank",
+  "block.replicationextended.locked_matter_tank_organic": "Organic Matter Tank",
+  "block.replicationextended.locked_matter_tank_ender": "Ender Matter Tank",
+  "block.replicationextended.locked_matter_tank_metallic": "Metallic Matter Tank",
+  "block.replicationextended.locked_matter_tank_precious": "Precious Matter Tank",
+  "block.replicationextended.locked_matter_tank_living": "Living Matter Tank",
+  "block.replicationextended.locked_matter_tank_quantum": "Quantum Matter Tank"
+}

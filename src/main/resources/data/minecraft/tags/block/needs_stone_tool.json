@@ -1,0 +1,12 @@
+{
+  "values": [
+    "replicationextended:locked_matter_tank_earth",
+    "replicationextended:locked_matter_tank_nether",
+    "replicationextended:locked_matter_tank_organic",
+    "replicationextended:locked_matter_tank_ender",
+    "replicationextended:locked_matter_tank_metallic",
+    "replicationextended:locked_matter_tank_precious",
+    "replicationextended:locked_matter_tank_living",
+    "replicationextended:locked_matter_tank_quantum"
+  ]
+}
