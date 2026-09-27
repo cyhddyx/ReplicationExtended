@@ -132,8 +132,9 @@ dependencies {
     // Titanium supplies the block/tile/network base classes this addon extends.
     implementation "com.hrznstudio:titanium:${titanium_version}"
 
-    // Pin the public release so a fresh checkout builds without a sibling source tree.
-    implementation "curse.maven:replication-638351:7662870"
+    // Replication is built locally in the sibling checkout and consumed as a jar.
+    // Run `./gradlew build` in ../Replication before building this project.
+    implementation fileTree(dir: '../Replication/build/libs', include: ['Replication-*.jar'], exclude: ['*-sources.jar', '*-dev.jar'])
 
     // Jade is optional: only the compat plugin references it, and that class is only ever loaded
     // when Jade is actually installed.

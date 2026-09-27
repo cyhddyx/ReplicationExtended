@@ -40,7 +40,9 @@ Surround a Replication matter tank with four matching catalysts in a cross. **Em
 
 ## Build
 
-Install JDK 21, then run `./gradlew build` (Windows: `.\gradlew.bat build`). Dependencies are downloaded automatically; a sibling Replication checkout is not required. The addon JAR is generated in `build/libs/`.
+Install JDK 21 and place the Replication source checkout next to this addon as `../Replication`. Build Replication first so its compiled `Replication-*.jar` is available in `../Replication/build/libs/`. Then run `./gradlew build` (Windows: `.\gradlew.bat build`) in this addon. The addon reads that local Replication JAR; it does not download Replication through Gradle. The addon JAR is generated in `build/libs/`.
+
+The GitHub build workflow also needs that local dependency prepared; checking out this addon alone is not sufficient.
 
 ## Status and Feedback
 
