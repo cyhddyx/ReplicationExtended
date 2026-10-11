@@ -61,6 +61,18 @@ ITI
 
 **升级不会转移储罐中存储的物质，请先清空。**
 
+## 从源码构建
+
+安装 JDK 21，在本仓库根目录运行：
+
+```powershell
+.\gradlew.bat build
+```
+
+Linux / macOS 使用 `chmod +x gradlew` 后运行 `./gradlew build`。
+
+Gradle 会自动下载固定版本的 Replication、Titanium 和 Jade 构建依赖，无需另行克隆或构建 Replication。首次构建需要联网，生成的模组文件位于 `build/libs/`。
+
 ## 反馈
 
 [提交问题或功能建议](https://github.com/cyhddyx/ReplicationExtended/issues)。

@@ -36,7 +36,7 @@ repositories {
         name = 'jared maven'
         url = 'https://maven.blamejared.com/'
     }
-    // Jade (optional top-of-screen block tooltip) is distributed through the CurseForge maven.
+    // Replication and Jade are distributed through the CurseForge maven.
     maven {
         name = 'cursemaven'
         url = 'https://www.cursemaven.com'
@@ -132,9 +132,8 @@ dependencies {
     // Titanium supplies the block/tile/network base classes this addon extends.
     implementation "com.hrznstudio:titanium:${titanium_version}"
 
-    // Replication is built locally in the sibling checkout and consumed as a jar.
-    // Run `./gradlew build` in ../Replication before building this project.
-    implementation fileTree(dir: '../Replication/build/libs', include: ['Replication-*.jar'], exclude: ['*-sources.jar', '*-dev.jar'])
+    // Pin the public release so local and CI builds use the same dependency.
+    implementation "curse.maven:replication-638351:7662870"
 
     // Jade is optional: only the compat plugin references it, and that class is only ever loaded
     // when Jade is actually installed.
